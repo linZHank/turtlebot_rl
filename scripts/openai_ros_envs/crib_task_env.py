@@ -114,7 +114,7 @@ class CribTaskEnv(TurtlebotRobotEnv):
     goal_x = random.uniform(self.low[0]+.5, self.high[0]-.5)
     goal_y = random.uniform(self.low[1]+.5, self.high[1]-.5)
     self.goal_position = np.array([goal_x, goal_y])
-    while np.linalg.norm(self.goal_position - self.init_position) <= 0.5:
+    while np.linalg.norm(self.goal_position - self.init_position) <= 0.2:
     # while int(goal_x)==int(x) and int(goal_y)==int(y): # goal and bot should not in the same grid
       rospy.logerr("Goal was set too close to the robot, reset the goal...")
       goal_x = random.uniform(self.low[0]+.5, self.high[0]-.5)

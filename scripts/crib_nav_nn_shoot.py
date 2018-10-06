@@ -64,7 +64,7 @@ if __name__ == "__main__":
     tf.keras.layers.Dense(num_states)
   ])
   # set training parameters
-  num_epochs = 512
+  num_epochs = 256
   num_iters = 32
 
   # Random Sampling
@@ -128,7 +128,7 @@ if __name__ == "__main__":
   root.save(file_prefix=checkpoint_prefix)
   # train random samples
   rst_start = time.time()
-  for epoch in range(num_epochs/8):
+  for epoch in range(int(num_epochs/8)):
     epoch_loss_avg = tfe.metrics.Mean()
     for i, (x,y) in enumerate(dataset):
       batch_start = time.time()
@@ -188,7 +188,7 @@ if __name__ == "__main__":
       np.array(stacs_memory),
       np.array(nextstates_memory),
       batch_size=batch_size,
-      num_epochs=4
+      num_epochs=2
     )
     ep_start = time.time()
     for i, (x, y) in enumerate(dataset):
@@ -207,9 +207,9 @@ if __name__ == "__main__":
       "\n{:d} Controlled Samples was trained {:d} epochs",
       "\nTotal execution time: {:.4f}".format(
         num_epochs*num_iters,
-        num_epochs/4,
+        int(num_epochs/4),
         num_episodes*num_steps,
-        num_episodes*4,
+        int(num_episodes*2),
         main_end-main_start
       )
     )
